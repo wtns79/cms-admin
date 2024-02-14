@@ -1,0 +1,17 @@
+/* Общие стили для приложения */
+.app {
+    display: flex;
+}
+
+/* Стили для боковой панели меню */
+.sidebar {
+    flex: 0 0 auto; /* Фиксированная ширина */
+    width: 250px;
+    background-color: #f0f0f0;
+}
+
+/* Стили для контента */
+.content {
+    flex: 1;
+    padding: 20px;
+}

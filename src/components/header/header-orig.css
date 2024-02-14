@@ -1,0 +1,26 @@
+.header {
+    background-color: #3c8dbc;
+    color: #fff;
+    min-height: 50px;
+    display: flex;
+    flex-direction: row;
+    padding: 0 16px;
+}
+
+.header a {
+    color: #fff;
+}
+
+.header div.menu {
+    display: flex;
+    flex: 1 1;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.header div.info {
+    display: flex;
+    flex: 1 1;
+    align-items: center;
+    justify-content: flex-end;
+}
