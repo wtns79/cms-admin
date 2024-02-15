@@ -1,0 +1,20 @@
+.block-actions {
+    display: flex;
+    flex-direction: row;
+}
+
+.block-actions .title {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.block-actions .items {
+    flex: 1;
+    padding-left: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+

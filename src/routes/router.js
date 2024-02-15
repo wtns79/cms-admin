@@ -12,6 +12,7 @@ import CategoryView from "../views/category-view";
 import ContentView from "../views/content-view";
 import MenuView from "../views/menu-view";
 import MediaView from "../views/media-view";
+import BlockView from "../views/block-view";
 
 
 const router = createBrowserRouter([
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
                     {
                         path:"media",
                         element: <MediaView/>,
+                    },
+                    {
+                        path:"block",
+                        element: <BlockView/>,
                     }
                 ]
             },
