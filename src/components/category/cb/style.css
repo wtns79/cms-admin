@@ -1,15 +1,15 @@
-.content-actions {
+.category-actions {
     display: flex;
     flex-direction: row;
 }
 
-.content-actions .title {
+.category-actions .title {
     font-size: 2rem;
     display: flex;
     align-items: center;
 }
 
-.content-actions .items {
+.category-actions .items {
     flex: 1;
     padding-left: 4px;
     display: flex;
