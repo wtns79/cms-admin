@@ -1,0 +1,20 @@
+
+.tree-title-wrap {
+    width: 350px;
+    display: flex;
+    flex-direction: row;
+}
+
+.tree-title-wrap .tree-title {
+    padding: 0 4px;
+}
+
+.tree-title-wrap .tree-actions {
+    display: flex;
+    flex-direction: row;
+}
+
+.tree-title-wrap-selected {
+    background-color: #ced3d3;
+    border-radius: 2px;
+}

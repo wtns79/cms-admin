@@ -8,6 +8,10 @@ async function loadAll() {
     return load(0, 100000000000)
 }
 
+async function loadChilds() {
+    return axiosApi.get(`/api/block/load-childs`)
+}
+
 async function getById(id) {
     return axiosApi.get('/api/block/'+id)
 }
@@ -27,6 +31,7 @@ async function update(data) {
 export default {
     create:create,
     load:load,
+    loadChilds:loadChilds,
     update:update,
     getById:getById,
     delById:delById,

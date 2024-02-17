@@ -2,65 +2,73 @@ import * as React from "react";
 import {useState} from "react";
 import './styles.css'
 import api from "../../../service/page/index";
-import {Button, Checkbox, Input, Modal, message, Tooltip, Divider} from "antd";
-import CategoryCb from "../../category/cb";
-import BlockCb from "../../block/cb";
-import ContentCb from "../../content/cb";
-import {EyeOutlined, HomeOutlined, PlusOutlined} from "@ant-design/icons";
+import {Button, Checkbox, Input, Modal, message, Tooltip, Divider, Popconfirm, Dropdown} from "antd";
+import {DeleteOutlined, EyeOutlined, HomeOutlined, PlusOutlined} from "@ant-design/icons";
 
-export default function PageActions({page, onClose}) {
-    // const [items, setItems] = useState(null);
-    // const [title, setTitle] = useState(page?.title || '');
-    // const [contentId, setContentId] = useState(page?.content_id);
-    // const [blockId, setBlockId] = useState(page?.block_id);
-    // const [categoryId, setCategoryId] = useState(page?.category_id);
-    // const [mediaId, setMediaId] = useState(page?.media_id);
-    // const [media, setMedia] = useState(page?.media);
-    // const [isMain, setIsMain] = useState(page?.is_main || false);
-    // const [openModal, setOpenModal] = useState(open)
-    //
-    // const action = page?.id ? api.update : api.create
-    //
-    // const onOk = function () {
-    //     action({
-    //         id: page?.id,
-    //         is_main: isMain,
-    //         title: title,
-    //         block_id: blockId,
-    //         category_id: categoryId,
-    //         media_id: mediaId,
-    //         content_id: contentId,
-    //     }).catch(e => {
-    //       console.log(e)
-    //         message.error('Ошибка при сохранении данных')
-    //     }).then(r => {
-    //         if (!r) return
-    //         setOpenModal(false)
-    //         onClose(true)
-    //     })
-    // }
+function PageActionsMenu({items, onClick}) {
+    return (
+        <Dropdown menu={{ items, onClick }}>
+            <Button className='page-block-add' shape="circle" size="small" icon={<PlusOutlined />} onClick={(e) => e.preventDefault()}/>
+        </Dropdown>
+    )
+}
 
-    const onShow = function () {
+export default function PageActions({page, blocks, onChange, onMenuClick}) {
+    const [pageLink, setPageLink] = useState(`${process.env.REACT_APP_API_SERVER}/page/${page.slug}`);
+    const [openConfirm, setOpenConfirm] = useState(false);
+    const [blockItems, setBlockItems] = useState(blocks);
 
+    React.useEffect(() => {
+    }, []);
+
+    const onShowPageConfirm = function () {
+        setOpenConfirm(true)
+    }
+
+    const onOkPageConfirm = function () {
+        page.is_main = true
+        api.update(page).then(r=>{
+            setOpenConfirm(false)
+            onChange(page)
+        })
+    }
+
+    const onCancelPageConfirm = function () {
+        setOpenConfirm(false)
     }
 
     const onAdd = function () {
 
     }
 
+    const onMenuItemClick = ({key}) => {
+        onMenuClick(page.id, key)
+    };
+
     return (
         <div className='page-tree-actions'>
             <div className='page-tree-action-list'>
                 <Tooltip title="Просмотр страницы">
-                    <Button className='page-block-add' shape="circle" size="small" icon={<EyeOutlined />} onClick={onShow}/>
+                    <Button className='page-block-add' type="link" target="_blank"
+                            href={pageLink} shape="circle" size="small" icon={<EyeOutlined />}/>
                 </Tooltip>
                 <Divider type="vertical"/>
                 <Tooltip title="Сделать главной страницей">
-                    <Button className='page-block-add' shape="circle" size="small" icon={<HomeOutlined />} onClick={onShow}/>
+                    <Popconfirm
+                        title="Страницы"
+                        description="Сделать главной страницей?"
+                        open={openConfirm}
+                        onConfirm={onOkPageConfirm}
+                        onCancel={onCancelPageConfirm}
+                        okText="Да"
+                        cancelText="Нет"
+                    >
+                        <Button className='page-block-add' shape="circle" size="small" icon={<HomeOutlined />} onClick={onShowPageConfirm}/>
+                    </Popconfirm>
                 </Tooltip>
                 <Divider type="vertical"/>
                 <Tooltip title="Добавить блок">
-                    <Button className='page-block-add' shape="circle" size="small" icon={<PlusOutlined />} onClick={onAdd}/>
+                    <PageActionsMenu items={blocks} onClick={onMenuItemClick}/>
                 </Tooltip>
             </div>
             <div className='page-tree-action-content'>

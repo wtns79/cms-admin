@@ -21,7 +21,7 @@ function treeTitleAction(data, selected, onTreeItemClick) {
         <div className={cn} onClick={onClick}>
             <div className="tree-icon">{data.is_main ? <Tooltip title="Главная"><HomeOutlined style={{ color: '#3fa110' }}/></Tooltip> : null}</div>
             <div className="tree-title">{data.title}</div>
-            <div className="tree-actions">Action</div>
+            {/*<div className="tree-actions">Action</div>*/}
         </div>
     )
 }

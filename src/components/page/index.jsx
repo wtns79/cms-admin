@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './style.css'
 import api from "../../service/page";
+import apiBlock from "../../service/block";
 import {Button, Tooltip} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import PageEdit from "./edit";
@@ -12,11 +13,20 @@ export default function Page() {
     const [items, setItems] = useState(null)
     const [open, setOpen] = useState(false)
     const [page, setPage] = useState(null)
+    const [blocks, setBlocks] = useState(null)
 
     const load = function () {
         setItems(null)
+        setPage(null)
         api.tree().then(r => {
             setItems(r.data)
+        })
+    }
+
+    const loadBlocks = function () {
+        setBlocks(null)
+        apiBlock.loadChilds().then(r => {
+            setBlocks(r.data)
         })
     }
 
@@ -26,7 +36,6 @@ export default function Page() {
 
     const onAddRoot = function () {
         api.root().then(r => {
-            console.log(r.data)
             onEditClick(r.data)
         })
     }
@@ -45,8 +54,21 @@ export default function Page() {
         load()
     }
 
+    const onChange = function (page) {
+        setItems(null)
+        api.tree().then(r => {
+            setItems(r.data)
+            setPage(page)
+        })
+    }
+
     const onSelectClick = function (row) {
         setPage(row)
+        loadBlocks()
+    }
+
+    const onMenuClick = function (id, blockId) {
+        onEditClick({parent_id: id, block_id: blockId})
     }
 
     let tree;
@@ -71,7 +93,7 @@ export default function Page() {
                 {tree}
             </div>
             <div className="items-tree-actions">
-                {page && <PageActions page={page}/>}
+                {page && <PageActions page={page} blocks={blocks} onChange={onChange} onMenuClick={onMenuClick}/>}
             </div>
         </div>
     </div>;
