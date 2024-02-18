@@ -4,7 +4,7 @@ import Grid from "../grid/grid";
 
 const columns = [
     {
-        name:'name',
+        name:'title',
         title: 'Наименование',
     },
     {

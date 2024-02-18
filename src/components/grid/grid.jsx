@@ -14,7 +14,7 @@ function GridHeader({columns}) {
     </tr>
 }
 
-function GridRow({columns, item, onEditClick, onDelClick, onRowClick, otherActions}) {
+function GridRow({columns, item, selected, onEditClick, onDelClick, onRowClick, otherActions}) {
     let editAction;
     let delAction;
     if (onEditClick) {
@@ -52,8 +52,16 @@ function GridRow({columns, item, onEditClick, onDelClick, onRowClick, otherActio
         e.preventDefault()
         e.stopPropagation()
     }
+
+    let selectedCls = '';
+    if (selected) {
+        if (selected.id == item.id) {
+            selectedCls = 'selected'
+        }
+    }
+
     const otherActionsRow = otherActions ? otherActions(item) : null
-    return <tr onClick={onTrClick}>
+    return <tr onClick={onTrClick} className={selectedCls}>
         {cols}
         <td>
             {editAction}
@@ -66,6 +74,12 @@ function GridRow({columns, item, onEditClick, onDelClick, onRowClick, otherActio
 export default function Grid({columns, rows, pages, onEditClick, onDelClick, onRowClick, onPageChange, otherActions}) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [row, setRow] = useState(null);
+    const [selected, setSelected] = useState(null);
+
+    const onGridRowClick = function (row) {
+        setSelected(row)
+        onRowClick(row)
+    }
 
     const showModal = function (row) {
         setRow(row)
@@ -92,8 +106,8 @@ export default function Grid({columns, rows, pages, onEditClick, onDelClick, onR
     if (!rows) {
         rowList = null
     } else {
-        rowList = rows.map((item) => <GridRow key={'building-' + item.id} columns={columns} item={item}
-                                              onEditClick={onEditClick} onDelClick={showModal} onRowClick={onRowClick} otherActions={otherActions}/>)
+        rowList = rows.map((item) => <GridRow key={'building-' + item.id} columns={columns} item={item} selected={selected}
+                                              onEditClick={onEditClick} onDelClick={showModal} onRowClick={onGridRowClick} otherActions={otherActions}/>)
     }
 
     let paging;

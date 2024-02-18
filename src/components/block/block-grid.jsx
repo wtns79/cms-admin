@@ -8,6 +8,10 @@ const columns = [
         title: 'Наименование',
     },
     {
+        name:'code',
+        title: 'Код',
+    },
+    {
         name:'type',
         title: 'Тип',
     },

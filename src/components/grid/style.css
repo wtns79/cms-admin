@@ -13,6 +13,10 @@
 
 .grid tr:hover {background-color: #ddd;}
 
+.grid tr.selected {
+    background-color: rgba(190, 190, 190, 0.75);
+}
+
 .grid th {
     padding-top: 12px;
     padding-bottom: 12px;

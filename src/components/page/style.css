@@ -8,6 +8,8 @@
 .page-actions {
     display: flex;
     flex-direction: row;
+    background-color: white;
+    padding: 4px;
 }
 
 .page-actions .title {
@@ -19,20 +21,28 @@
 .page .items {
     flex: 1;
     flex-direction: row;
-    padding-left: 4px;
     display: flex;
-    align-items: stretch;
+    align-items: center;
     justify-content: flex-end;
 }
 
-.page-content {
+.page-contents-wrap {
     flex: 1;
     flex-direction: row;
-    padding-left: 4px;
     display: flex;
     align-items: stretch;
     justify-content: stretch;
     background-color: rgb(245,245,245);
+    padding-top: 4px;
 }
 
+.page-list-wrap {
+    background-color: white;
+    padding: 4px;
+    flex:1
+}
+
+.page-content-wrap {
+    flex: 4;
+}
 

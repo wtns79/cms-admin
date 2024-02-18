@@ -17,7 +17,7 @@ async function delById(id) {
 }
 
 async function create(data) {
-    return axiosApi.post(`/api/categories/create`, data, { headers: { "Content-Type": "multipart/form-data" }})
+    return axiosApi.post(`/api/categories/create`, data)
 }
 
 async function update(data) {

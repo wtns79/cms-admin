@@ -37,7 +37,7 @@ html, body {
     -ms-flex: 1;
     flex: 1;
     padding: 6px;
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
     /*background-color: rgb(245,245,245);*/
     /*background-color: rgb(150,156,156);*/
 }

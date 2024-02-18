@@ -5,8 +5,7 @@ import api from "../../../service/category/index";
 import {Button, Input, Modal} from "antd";
 
 export default function CategoryEdit({category, open, onClose}) {
-    const [items, setItems] = useState(null);
-    const [name, setName] = useState(category?.name || '');
+    const [title, setTitle] = useState(category?.title || '');
     const [openModal, setOpenModal] = useState(open)
 
     const action = category?.id ? api.update : api.create
@@ -14,14 +13,11 @@ export default function CategoryEdit({category, open, onClose}) {
     const onOk = function () {
         action({
             id: category?.id,
-            name: name
+            title: title
         }).then(r => {
             setOpenModal(false)
             onClose(true)
         })
-    }
-
-    const onResetClick = function () {
     }
 
     const onCancel = function () {
@@ -51,9 +47,9 @@ export default function CategoryEdit({category, open, onClose}) {
             //     </Button>
             // ]}
         >
-            <div className="page-content parking-spaces-filter">
-                <div className="parking-spaces-filter-content">
-                    <Input value={name} type="text" onChange={(e) => setName(e.target.value)}/>
+            <div className="category-edit">
+                <div className="label-inputs-v">
+                    <Input value={title} type="text" onChange={(e) => setTitle(e.target.value)}/>
                 </div>
             </div>
         </Modal>

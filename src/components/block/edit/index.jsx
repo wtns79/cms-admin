@@ -16,6 +16,7 @@ export default function BlockEdit({block, open, onClose}) {
     const [items, setItems] = useState(null);
     const [title, setTitle] = useState(block?.title || '');
     const [type, setType] = useState(block?.type || '');
+    const [code, setCode] = useState(block?.code || '');
     const [openModal, setOpenModal] = useState(open)
 
     const action = block?.id ? api.update : api.create
@@ -25,6 +26,7 @@ export default function BlockEdit({block, open, onClose}) {
             id: block?.id,
             title: title,
             type: type,
+            code: code,
         }).then(r => {
             setOpenModal(false)
             onClose(true)
@@ -67,13 +69,11 @@ export default function BlockEdit({block, open, onClose}) {
         >
             <div className="block-edit">
                 <div className="label-inputs-v">
+                    <label>Код</label>
+                    <Input value={code} type="text" onChange={(e) => setCode(e.target.value)}/>
+                </div>
+                <div className="label-inputs-v">
                     <label>Тип</label>
-                    {/*<Select*/}
-                    {/*    defaultValue={type}*/}
-                    {/*    style={{width: '100%'}}*/}
-                    {/*    onChange={onTypeChange}*/}
-                    {/*    options={types}*/}
-                    {/*/>*/}
                     <Input value={type} type="text" onChange={(e) => setType(e.target.value)}/>
                 </div>
                 <div className="label-inputs-v">

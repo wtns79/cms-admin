@@ -8,25 +8,29 @@ import PageEdit from "./edit";
 import PageTree from "./tree";
 import PageRoot from "./root";
 import PageActions from "./actions";
+import PageList from "./list";
+import PageGrid from "./grid";
+import PageContent from "./content";
 
 export default function Page() {
-    const [items, setItems] = useState(null)
+    const [items, setItems] = useState([])
     const [open, setOpen] = useState(false)
     const [page, setPage] = useState(null)
-    const [blocks, setBlocks] = useState(null)
+    const [contents, setContents] = useState(null)
 
-    const load = function () {
-        setItems(null)
+    const load = function (page) {
+        setItems([])
         setPage(null)
-        api.tree().then(r => {
+        api.load().then(r => {
             setItems(r.data)
         })
     }
 
-    const loadBlocks = function () {
-        setBlocks(null)
+    const loadContent = function (page) {
+        setContents(null)
+        if (page == null) return;
         apiBlock.loadChilds().then(r => {
-            setBlocks(r.data)
+            setContents(r.data)
         })
     }
 
@@ -35,9 +39,12 @@ export default function Page() {
     }, []);
 
     const onAddRoot = function () {
-        api.root().then(r => {
-            onEditClick(r.data)
-        })
+        onEditClick({})
+    }
+
+    const onRowClick = function (row) {
+        setPage(row)
+        loadContent(row)
     }
 
     const onEditClick = function (row) {
@@ -51,31 +58,9 @@ export default function Page() {
 
     const onClose = function (refresh) {
         setOpen(false)
-        load()
-    }
-
-    const onChange = function (page) {
-        setItems(null)
-        api.tree().then(r => {
-            setItems(r.data)
-            setPage(page)
-        })
-    }
-
-    const onSelectClick = function (row) {
-        setPage(row)
-        loadBlocks()
-    }
-
-    const onMenuClick = function (id, blockId) {
-        onEditClick({parent_id: id, block_id: blockId})
-    }
-
-    let tree;
-    if (!items) {
-        tree = null
-    } else {
-        tree = <PageTree data={items} onSelectClick={onSelectClick}/>
+        if (refresh) {
+            load(page)
+        }
     }
 
     return <div className="page">
@@ -88,12 +73,12 @@ export default function Page() {
             </div>
             {open && <PageRoot page={page} open={open} onClose={onClose}/>}
         </div>
-        <div className="page-content">
-            <div className="items-tree">
-                {tree}
+        <div className="page-contents-wrap">
+            <div className="page-list-wrap">
+                <PageGrid rows={items} onEditClick={onEditClick} onDelClick={onDelClick} onRowClick={onRowClick}/>
             </div>
-            <div className="items-tree-actions">
-                {page && <PageActions page={page} blocks={blocks} onChange={onChange} onMenuClick={onMenuClick}/>}
+            <div className="page-content-wrap">
+                <PageContent items={page}/>
             </div>
         </div>
     </div>;
