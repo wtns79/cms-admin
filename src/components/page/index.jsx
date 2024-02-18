@@ -5,10 +5,6 @@ import apiBlock from "../../service/block";
 import {Button, Tooltip} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import PageEdit from "./edit";
-import PageTree from "./tree";
-import PageRoot from "./root";
-import PageActions from "./actions";
-import PageList from "./list";
 import PageGrid from "./grid";
 import PageContent from "./content";
 
@@ -71,7 +67,7 @@ export default function Page() {
                     <Button className='page-add' shape="circle" icon={<PlusOutlined />} onClick={onAddRoot}/>
                 </Tooltip>
             </div>
-            {open && <PageRoot page={page} open={open} onClose={onClose}/>}
+            {open && <PageEdit page={page} open={open} onClose={onClose}/>}
         </div>
         <div className="page-contents-wrap">
             <div className="page-list-wrap">

@@ -18,8 +18,12 @@ export default function PageEdit({page, open, onClose}) {
             is_main: isMain,
             title: title,
         }).catch(e => {
-          console.log(e)
-            message.error('Ошибка при сохранении данных')
+            console.log(e)
+            // if (e && e.response && e.response.data && e.response.data.message) {
+            //     message.error(e.response.data.message)
+            // } else {
+            //     message.error('Ошибка при сохранении данных')
+            // }
         }).then(r => {
             if (!r) return
             setOpenModal(false)
