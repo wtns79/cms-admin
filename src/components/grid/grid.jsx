@@ -53,10 +53,10 @@ function GridRow({columns, item, selected, onEditClick, onDelClick, onRowClick, 
         e.stopPropagation()
     }
 
-    let selectedCls = '';
+    let selectedCls = 'grid-row';
     if (selected) {
         if (selected.id == item.id) {
-            selectedCls = 'selected'
+            selectedCls += ' selected'
         }
     }
 

@@ -4,6 +4,10 @@ async function load(offset=0, limit=10) {
     return axiosApi.get(`/api/content/load?offset=${offset}&limit=${limit}`)
 }
 
+async function tree(page) {
+    return axiosApi.get(`/api/content/tree/${page}`)
+}
+
 async function loadAll() {
     return load(0, 100000000000)
 }
@@ -26,6 +30,7 @@ async function update(data) {
 
 export default {
     create:create,
+    tree:tree,
     load:load,
     update:update,
     getById:getById,

@@ -38,7 +38,7 @@ export default function PageEdit({page, open, onClose}) {
 
     return (
         <Modal
-            title="Содержание"
+            title="Страница"
             centered
             okText={'Сохранить'}
             cancelText={'Отменить'}

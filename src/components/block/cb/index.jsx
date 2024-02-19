@@ -3,9 +3,8 @@ import {Button, Select, Tooltip} from "antd";
 import api from '../../../service/block/index';
 import './style.css'
 
-export default function BlockCb({value, onChange}) {
+export default function BlockCb({value, type, onChange}) {
     const [items, setItems] = useState(null)
-    const [category, setCategory] = useState(null)
 
     const toOptions = function (items) {
         if (!items) return null
@@ -19,7 +18,7 @@ export default function BlockCb({value, onChange}) {
     };
 
     const load = function () {
-        api.load().then(r => {
+        api.loadByType(type).then(r => {
             setItems(toOptions(r.data))
         })
     }

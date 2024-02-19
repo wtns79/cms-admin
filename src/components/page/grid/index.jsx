@@ -10,7 +10,7 @@ const columns = [
         title: 'Наименование',
         render:function (row) {
             let main = row.is_main ? <Tooltip title={'Главная страница'}> <HomeOutlined style={{color: 'green', paddingRight:'4px'}}/> </Tooltip> : null;
-            return <span >{main}{row.title}</span>
+            return <span>{main}{row.title}</span>
         }
     },
     {
