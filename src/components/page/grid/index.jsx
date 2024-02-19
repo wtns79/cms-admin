@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import './style.css'
 import Grid from "../../grid/grid";
-import {HomeOutlined} from "@ant-design/icons";
-import {Tooltip} from "antd";
+import {DeleteOutlined, EyeOutlined, HomeOutlined} from "@ant-design/icons";
+import {Button, Tooltip} from "antd";
 
 const columns = [
     {
@@ -20,8 +20,8 @@ const columns = [
     }
 ]
 
-export default function PageGrid({rows, onEditClick, onDelClick, onRowClick}) {
+export default function PageGrid({rows, onEditClick, onDelClick, onRowClick, otherActions}) {
     return (
-        <Grid columns={columns} rows={rows} onEditClick={onEditClick} onDelClick={onDelClick} onRowClick={onRowClick}/>
+        <Grid columns={columns} rows={rows} onEditClick={onEditClick} onDelClick={onDelClick} onRowClick={onRowClick} otherActions={otherActions}/>
     );
 }

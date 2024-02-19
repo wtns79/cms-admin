@@ -1,0 +1,8 @@
+.tree-title-wrap {
+    display: flex;
+    flex-direction: row;
+}
+
+.tree-title-wrap .tree-title {
+    flex: 1;
+}

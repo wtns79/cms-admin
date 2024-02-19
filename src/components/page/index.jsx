@@ -3,7 +3,7 @@ import './style.css'
 import api from "../../service/page";
 import apiContent from "../../service/content";
 import {Button, Tooltip} from "antd";
-import {PlusOutlined} from "@ant-design/icons";
+import {EyeOutlined, PlusOutlined} from "@ant-design/icons";
 import PageEdit from "./edit";
 import PageGrid from "./grid";
 import PageContent from "./content";
@@ -59,6 +59,31 @@ export default function Page() {
         }
     }
 
+    const onChangeTree = function (page) {
+        loadContent(page)
+    }
+
+    const onShow = function (page) {
+        console.log(page)
+    }
+
+    const otherActions = function (page) {
+        let pageLink = `${process.env.REACT_APP_API_SERVER}/page/${page.slug}`
+        const onShowClick = function (e) {
+            window.open(pageLink, "_blank");
+            e.preventDefault()
+            e.stopPropagation()
+        }
+        return (
+            <Tooltip title="Просмотр">
+                <Button shape="circle" icon={<EyeOutlined />} size='small' onClick={onShowClick}/>
+            </Tooltip>
+        )
+
+    }
+
+    let pc = (page != null && contents != null) ? <PageContent items={contents} page={page} onChange={onChangeTree}/> : null
+
     return <div className="page">
         <div className="pages-wrap">
             <div className="page-actions">
@@ -71,11 +96,11 @@ export default function Page() {
                 {open && <PageEdit page={page} open={open} onClose={onClose}/>}
             </div>
             <div className="page-list-wrap">
-                <PageGrid rows={items} onEditClick={onEditClick} onDelClick={onDelClick} onRowClick={onRowClick}/>
+                <PageGrid rows={items} onEditClick={onEditClick} onDelClick={onDelClick} onRowClick={onRowClick} onShow={onShow} otherActions={otherActions}/>
             </div>
         </div>
         <div className="page-contents-wrap">
-            {page && contents && <PageContent items={contents} page={page}/>}
+            {pc}
         </div>
 
     </div>;

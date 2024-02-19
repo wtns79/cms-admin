@@ -3,6 +3,7 @@ import {useState} from "react";
 import './styles.css'
 import api from "../../../service/block/index";
 import {Button, Input, Modal, Select} from "antd";
+import BlockTypeCb from "../type-cb";
 
 const types = [
     {value: 'layout', label: 'Макет'},
@@ -74,7 +75,8 @@ export default function BlockEdit({block, open, onClose}) {
                 </div>
                 <div className="label-inputs-v">
                     <label>Тип</label>
-                    <Input value={type} type="text" onChange={(e) => setType(e.target.value)}/>
+                    {/*<Input value={type} type="text" onChange={(e) => setType(e.target.value)}/>*/}
+                    <BlockTypeCb value={type} onChange={(v) => setType(v)}/>
                 </div>
                 <div className="label-inputs-v">
                     <label>Название</label>

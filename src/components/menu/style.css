@@ -31,3 +31,8 @@
     padding-left: 4px;
     display: flex;
 }
+
+.menu-tree {
+    background-color: white;
+    padding: 4px;
+}

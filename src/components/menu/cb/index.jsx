@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Button, Select, Tooltip} from "antd";
-import api from '../../../service/block/index';
+import api from '../../../service/menu/index';
 import './style.css'
 
-export default function BlockCb({value, type, onChange}) {
+export default function MenuCb({value, onChange}) {
     const [items, setItems] = useState(null)
 
     const toOptions = function (items) {
@@ -19,7 +19,7 @@ export default function BlockCb({value, type, onChange}) {
     };
 
     const load = function () {
-        api.loadByType(type).then(r => {
+        api.root().then(r => {
             setItems(toOptions(r.data))
         })
     }

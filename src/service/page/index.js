@@ -42,5 +42,5 @@ export default {
     getById:getById,
     delById:delById,
     loadAll:loadAll,
-    // excelDownload:`${process.env.REACT_APP_API_SERVER}/api/media/download/`
+    showPage:`${process.env.REACT_APP_API_SERVER}/page/`
 }

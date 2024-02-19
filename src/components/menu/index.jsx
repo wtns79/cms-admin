@@ -64,7 +64,7 @@ export default function Menu() {
             </div>
             <div className="menu-content">
                 <div className="menu-tree">
-                    <Tree defaultExpandAll={true} showLine treeData={items}
+                    <Tree className="" defaultExpandAll={true} showLine treeData={items}
                           titleRender = {titleRender}
                           fieldNames = {{children: 'items'}}
                     />
